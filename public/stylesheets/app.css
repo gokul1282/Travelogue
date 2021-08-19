@@ -1,0 +1,5 @@
+/* for show page(show.ejs) */
+#map {
+    width: 100%;
+    height: 300px;
+}
