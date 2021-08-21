@@ -54,7 +54,6 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
-
 const isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.requestedPage = req.originalUrl
@@ -67,6 +66,8 @@ const isLoggedIn = (req, res, next) => {
     }
 
 }
+
+
 
 const app = express();
 //app.use('/campgrounds', campgrounds);
