@@ -296,6 +296,13 @@ app.get('/campgrounds/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
 
 
 app.put('/campgrounds/:id', isLoggedIn, upload.array('image'), catchAsync(async (req, res) => {
+
+  const geoData = await geocoder.forwardGeocode({
+        query: req.body.campground.location,
+        limit: 1
+
+    }).send()
+
     const { id } = req.params
     console.log()
     const campground = await Campground.findById(id);
@@ -306,10 +313,12 @@ app.put('/campgrounds/:id', isLoggedIn, upload.array('image'), catchAsync(async 
         res.redirect(`/campgrounds/${id}`)
     }
     else {
+
         const camp = await Campground.findByIdAndUpdate(id, { ...req.body.campground })
+         
         const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));  // making the images as array (imgs)
         campground.images.push(...imgs);  //spreads the images and piushes them one by one....
-
+         campground.geometry = geoData.body.features[0].geometry
         await campground.save();                                   /// new can also be set to true .....(as per wish)
 
         if (req.body.deleteImages) {
