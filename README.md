@@ -17,7 +17,7 @@ Setting up the backend of the project:
 - Install NodeJS & MongoDB on your pc. 
 - Install the node modules from package.json by: `npm install` 
 - To start the project type: `node app.js`
-- Visit `localhost:3000/` on your browser to start he project. 
+- Visit `localhost:3000/` on your browser to start the project. 
 
 
 -------------------
